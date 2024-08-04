@@ -1,0 +1,30 @@
+services:
+  backend-flask:
+    environment:
+      BACKEND_URL: "http://localhost:4567"
+      FRONTEND_URL: "http://localhost:3000"
+
+    build: ./backend-flask
+    ports:
+      - "4567:4567"
+    volumes:
+      - C:\dev_app\backend-flask:C:\dev_app\backend-flask:rw
+
+  frontend-react:
+    environment:
+      BACKEND_URL: "http://localhost:4567"
+    
+    build: ./frontend-react
+    ports:
+      - "3000:3000"
+    volumes:
+      - C:\dev_app\frontend-react:C:\dev_app\frontend-react
+
+networks:
+  internal-network:
+    driver: bridge
+    name: dev_app
+
+volumes:
+  db:
+    driver: local
